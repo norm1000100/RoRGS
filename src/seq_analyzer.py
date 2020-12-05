@@ -29,4 +29,43 @@ class seq_analyzer:
         #list of substrings to return
         substrings = []
 
-        print(f"sequence: {sequence}\nminimum substring length: {minLength}\nmaximum substring length: {maxLength}\nminOcc: {minOccurance}", flush=True)
+        #the length of the sequence
+        length = len(sequence)
+
+        #this chuck of code parses iterates through the sequence for substrings
+        #and adds them to substrings list
+        while minLength <= maxLength:
+            index = 0
+            temp = minLength
+            while temp <= length:
+                substring = []
+                string = sequence[index: temp]
+                substrings.append(string)
+                index = index + 1
+                temp = temp + 1
+            minLength = minLength + 1
+
+        #converting substrings list to set to remove duplicates
+        substringSet = set(substrings)
+
+        newSubstrings = []
+
+        #iterates through substringSet
+        #calculates count, and percentage of string
+        for strings in substringSet:
+            tempList = []
+
+            stringCount = sequence.count(strings)
+            stringPercent = round(((len(strings)*stringCount)/length)*100,2)
+
+            tempList.append(strings)
+            tempList.append(stringCount)
+            tempList.append(stringPercent)
+
+            if stringPercent >= minOccurance:
+                newSubstrings.append(tempList)
+
+
+        #creating a set to remove duplicates
+        #substringSet = set(substrings)
+        return newSubstrings

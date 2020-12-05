@@ -515,6 +515,8 @@
          <property name="font">
           <font>
            <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
           </font>
          </property>
          <property name="frameShape">
@@ -604,6 +606,9 @@
             <bold>true</bold>
            </font>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
          </column>
          <column>
           <property name="text">
@@ -615,6 +620,9 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
          </column>
          <item row="0" column="0">

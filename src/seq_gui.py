@@ -25,6 +25,7 @@ from seq_analyzer import seq_analyzer
 from Bio.SeqUtils import GC
 from Bio.Seq import Seq
 from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
@@ -119,8 +120,25 @@ class seq_gui(QWidget):
         self.label_gcVal.setText(str(GC(sequence)))
 
         #getting Amino Acid composition
-        protien_seq = Seq(sequence)
-        self.textEdit_aminoSeq.setText(str(protien_seq.translate()))
+        protein_seq = Seq(sequence)
+        self.textEdit_aminoSeq.setText(str(protein_seq.translate()))
 
         #using seq_analyzer to mine Sequence, returns list of lists
-        seq_analyzer.mineSequence(self, sequence, int(self.label_minSubSize.text()), int(self.label_maxSubSize.text()), int(self.label_minOccVal.text()))
+        substrings = seq_analyzer.mineSequence(self, sequence, int(self.label_minSubSize.text()), int(self.label_maxSubSize.text()), int(self.label_minOccVal.text()))
+
+        self._populateTable(substrings)
+
+        print(substrings, flush=True)
+
+
+    def _populateTable(self, list):
+        self.table_subString.setRowCount(0)
+        row = 0
+        self.table_subString.setRowCount(len(list))
+        for strings in list:
+            self.table_subString.setItem(row , 0, QTableWidgetItem(str(strings[0])))
+            self.table_subString.setItem(row , 1, QTableWidgetItem(str(strings[1])))
+            self.table_subString.setItem(row , 2, QTableWidgetItem(str(strings[2])))
+            row = row + 1
+
+        self.table_subString.sortItems(2, Qt.DescendingOrder)
