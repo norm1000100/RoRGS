@@ -61,7 +61,6 @@ class seq_gui(QWidget):
     #creates the functionality for the Open button
     @pyqtSlot()
     def bttn_openSeq_clicked(self):
-        print("open button clicked", flush=True)
         path, _ = QFileDialog.getOpenFileName(None, "Load Sequence", "", "Text Files (*.txt)")
         if path:
             file = open(path, "r")
@@ -72,7 +71,6 @@ class seq_gui(QWidget):
     #creates the functionality for the Save button
     @pyqtSlot()
     def bttn_save_clicked(self):
-        print("save button clicked", flush=True)
         path, _ = QFileDialog.getSaveFileName(None, "Save Sequence", "", "*.txt")
         if path:
             file = open(path, "w+")
