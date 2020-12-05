@@ -14,9 +14,6 @@ __email__           = "showes@unbc.ca, "
 __python_version__  = "3.9.0"
 
 
-#imports go here
-
-
 #the seq_analyzer class
 class seq_analyzer:
 
@@ -55,13 +52,19 @@ class seq_analyzer:
         for strings in substringSet:
             tempList = []
 
+            #calculating substring count
             stringCount = sequence.count(strings)
+
+            #calculating how the percentage of the sequence the string takes
             stringPercent = round(((len(strings)*stringCount)/length)*100,2)
 
+            #creating the subtring list with info
+            #(substring, count, percentage)
             tempList.append(strings)
             tempList.append(stringCount)
             tempList.append(stringPercent)
 
+            #only adds templist to substring list if minOccurance is met
             if stringPercent >= minOccurance:
                 newSubstrings.append(tempList)
 

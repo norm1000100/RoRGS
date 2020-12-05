@@ -143,18 +143,28 @@ class seq_gui(QWidget):
         #using seq_analyzer to mine Sequence, returns list of lists
         substrings = seq_analyzer.mineSequence(self, sequence, int(self.label_minSubSize.text()), int(self.label_maxSubSize.text()), int(self.label_minOccVal.text()))
 
+        #filling the table
         self._populateTable(substrings)
 
 
     #populates the table_subString
     def _populateTable(self, list):
+
+        #clearing the table
         self.table_subString.setRowCount(0)
+
+        #setting the row count to start adding info
         row = 0
+
+        #setting the row count to the number of items
         self.table_subString.setRowCount(len(list))
+
+        #adding items
         for strings in list:
             self.table_subString.setItem(row , 0, QTableWidgetItem(str(strings[0])))
             self.table_subString.setItem(row , 1, QTableWidgetItem(str(strings[1])))
             self.table_subString.setItem(row , 2, QTableWidgetItem(str(strings[2])))
             row = row + 1
 
+        #sorting items by % of sequence
         self.table_subString.sortItems(2, Qt.DescendingOrder)
