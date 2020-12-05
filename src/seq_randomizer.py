@@ -18,7 +18,7 @@ from datetime import datetime
 
 
 # the seq_randomizer class
-class Seq_Randomizer:
+class seq_randomizer:
 
     # constructor
     def __init__(self):

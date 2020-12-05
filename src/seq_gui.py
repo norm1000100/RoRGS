@@ -22,6 +22,7 @@ __python_version__  = "3.9.0"
 import sys
 import os
 from seq_analyzer import seq_analyzer
+from seq_randomizer import seq_randomizer
 from Bio.SeqUtils import GC
 from Bio.Seq import Seq
 from PyQt5.QtWidgets import QFileDialog
@@ -43,6 +44,7 @@ class seq_gui(QWidget):
         loadUi("GUIs/gui.ui", self)
         self._load_connects()
         self.move(20,20)
+        self.randomizer = seq_randomizer()
 
 
     #loads the connection for the buttons
@@ -82,21 +84,38 @@ class seq_gui(QWidget):
     #creates the functionality for the clear button
     @pyqtSlot()
     def bttn_clearSeq_clicked(self):
-        print("clear button clicked", flush=True)
         self.textEdit_seq.clear()
 
 
     #creates the functionality for the Randomize button
     @pyqtSlot()
     def bttn_randomize_clicked(self):
-        print("randomize button clicked", flush=True)
 
-        #get Sequence from textEdit_seq
-        #randomize Sequence based on Randomization percentage
-        #display new sequence in texyEdit_seq
-        #auto run analysis
-        #compares previous sequence Amino Acid chain with new sequence amino Acid
-        #chain to ensure randomization worked
+        #getting the sequence
+        seq = self.textEdit_seq.toPlainText()
+
+        #getting the randomization percentage
+        randPercent = int(self.label_rand.text())
+
+        #getting amino chain from original sequence
+        proteinSeq = Seq(seq)
+        oldAnimoChain = str(proteinSeq.translate())
+
+        #randomiztion process
+        newSeq = self.randomizer.randomize(seq, randPercent)
+
+        #getting new amino chain
+        newProteinSeq = Seq(newSeq)
+        newAnimoChain = str(newProteinSeq.translate())
+
+        #comparing chains
+        #and updating textedit field and analyzing
+        if newAnimoChain == oldAnimoChain:
+            self.textEdit_seq.setText(newSeq)
+            self._analyzeSequence(newSeq)
+        else:
+            self.textEdit_aminoSeq.setText("-------ERROR------\nAnimo Acid Chain MisMatch!!!!!")
+
 
 
     #creates the functionality for the Analyze Sequence button
