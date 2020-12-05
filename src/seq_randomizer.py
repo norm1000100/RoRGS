@@ -12,9 +12,9 @@ __email__ = "velde@unbc.ca, showes@unbc.ca"
 __python_version__ = "3.9.0"
 
 # imports go here
-import random, CodonTable
+import CodonTable
+import random
 from datetime import datetime
-
 
 
 # the seq_randomizer class
@@ -28,7 +28,7 @@ class Seq_Randomizer:
     def _codonParse(self, sequence):  # parse out codon sequences
         codons = []
         if len(sequence) % 3 > 0:
-            sequence = sequence[: len(sequence)-(len(sequence) % 3)]
+            sequence = sequence[: len(sequence) - (len(sequence) % 3)]
         for i in range(0, len(sequence), 3):
             codons.append(sequence[i:i + 3])
         return codons
