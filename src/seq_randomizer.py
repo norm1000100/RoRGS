@@ -14,7 +14,7 @@ __python_version__ = "3.9.0"
 # imports go here
 import random, CodonTable
 from datetime import datetime
-from Bio.Seq import Seq
+
 
 
 # the seq_randomizer class
@@ -27,7 +27,6 @@ class Seq_Randomizer:
 
     def _codonParse(self, sequence):  # parse out codon sequences
         codons = []
-        remove = ""
         if len(sequence) % 3 > 0:
             sequence = sequence[: len(sequence)-(len(sequence) % 3)]
         for i in range(0, len(sequence), 3):
@@ -56,10 +55,3 @@ class Seq_Randomizer:
     def _proteinList(self, protein):
         protein_sub = self.codon_table.protein_to_codon[protein].copy()
         return protein_sub
-
-
-if __name__ == "__main__":
-    seq = "GCTACTCTAATA"
-    #print(Seq.translate(seq))
-    rnd = Seq_Randomizer()
-    print(rnd.randomize(seq, 100))
