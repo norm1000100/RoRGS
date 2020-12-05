@@ -145,9 +145,8 @@ class seq_gui(QWidget):
 
         self._populateTable(substrings)
 
-        print(substrings, flush=True)
 
-
+    #populates the table_subString
     def _populateTable(self, list):
         self.table_subString.setRowCount(0)
         row = 0
