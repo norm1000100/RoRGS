@@ -93,6 +93,9 @@ class seq_gui(QWidget):
         #getting the sequence
         seq = self.textEdit_seq.toPlainText()
 
+        #making seq uppercase
+        seq = seq.upper()
+
         #getting the randomization percentage
         randPercent = int(self.label_rand.text())
 
@@ -121,10 +124,12 @@ class seq_gui(QWidget):
     #creates the functionality for the Analyze Sequence button
     @pyqtSlot()
     def bttn_analyze_clicked(self):
-        self._errorMessage()
 
         #getting the sequence from the text edit boxn
         seq = self.textEdit_seq.toPlainText()
+
+        #making seq upper case
+        seq = seq.upper()
 
         #calling private analysis functionality
         self._analyzeSequence(seq)
@@ -177,7 +182,8 @@ class seq_gui(QWidget):
     #only parameter is a string which is the Message
     def _errorMessage(self, message):
         msg = QMessageBox()
-        msg.setWindowTitle("ERROR!")
+        msg.setWindowTitle("Error Message Box")
+        msg.setIcon(QMessageBox.Warning)
         msg.setText("<b>----- AN ERROR HAS OCCURED -----</b>")
         msg.setInformativeText(message)
         msg.exec()
