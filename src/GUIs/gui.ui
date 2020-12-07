@@ -402,7 +402,7 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_minOcc">
          <property name="text">
-          <string>Minimum Occurance (%)</string>
+          <string>Minimum Occurrence (%)</string>
          </property>
         </widget>
        </item>

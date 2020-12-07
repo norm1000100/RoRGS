@@ -27,6 +27,7 @@ from Bio.SeqUtils import GC
 from Bio.Seq import Seq
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
@@ -112,13 +113,15 @@ class seq_gui(QWidget):
             self.textEdit_seq.setText(newSeq)
             self._analyzeSequence(newSeq)
         else:
-            self.textEdit_aminoSeq.setText("-------ERROR------\nAnimo Acid Chain MisMatch!!!!!")
+            self._errorMessage("Animo Acid Chain MisMatch")
+            self.textEdit_aminoSeq.setText("Animo Acid Chain MisMatch!")
 
 
 
     #creates the functionality for the Analyze Sequence button
     @pyqtSlot()
     def bttn_analyze_clicked(self):
+        self._errorMessage()
 
         #getting the sequence from the text edit boxn
         seq = self.textEdit_seq.toPlainText()
@@ -168,3 +171,13 @@ class seq_gui(QWidget):
 
         #sorting items by % of sequence
         self.table_subString.sortItems(2, Qt.DescendingOrder)
+
+
+    #Error Message function
+    #only parameter is a string which is the Message
+    def _errorMessage(self, message):
+        msg = QMessageBox()
+        msg.setWindowTitle("ERROR!")
+        msg.setText("<b>----- AN ERROR HAS OCCURED -----</b>")
+        msg.setInformativeText(message)
+        msg.exec()
