@@ -3,6 +3,7 @@
 
 Analyses a sequence for substrings
 only has one function that will be called statically from the seq_gui.py file.
+Valid sequence (GCAT's) should be checked before Analysis
 
 """
 

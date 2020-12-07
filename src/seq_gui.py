@@ -131,8 +131,14 @@ class seq_gui(QWidget):
         #making seq upper case
         seq = seq.upper()
 
-        #calling private analysis functionality
-        self._analyzeSequence(seq)
+        #checking for valid valid characters
+        if self._seqCheck(seq):
+            #calling private analysis functionality
+            self._analyzeSequence(seq)
+            
+        else:
+            #Error Message
+            self._errorMessage("Invalid Characters detected in Sequence.")
 
 
     #This function does the analysis on the Sequence in textEdit_seq
@@ -142,7 +148,7 @@ class seq_gui(QWidget):
         self.label_charVal.setText(str(len(sequence)))
 
         #getting GC richness using biopython
-        self.label_gcVal.setText(str(GC(sequence)))
+        self.label_gcVal.setText(str(round(GC(sequence), 2)))
 
         #getting Amino Acid composition
         protein_seq = Seq(sequence)
@@ -187,3 +193,10 @@ class seq_gui(QWidget):
         msg.setText("<b>----- AN ERROR HAS OCCURED -----</b>")
         msg.setInformativeText(message)
         msg.exec()
+
+
+    #this function check that a sequence is only composed of G's C's A's T's
+    #not very efficient but does the job
+    def _seqCheck(self, sequence):
+        validChars = "GCAT"
+        return all(chars in validChars for chars in sequence)
