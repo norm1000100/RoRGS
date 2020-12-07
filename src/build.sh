@@ -1,5 +1,11 @@
 #! /bin/bash
 
+#This shell script will creat an executable for our project
+#Ensure all python dependencies are install before running this script
+#------NOTE------
+#For some reason, numpy version 1.19.4 does not work well with pyinstaller
+#only version 1.19.3 will work.
+
 #creating executable
 "pyinstaller" --onefile -i "media/dna.ico" --name="Sequence Analyzer" --noconsole main.py
 
