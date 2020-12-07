@@ -96,29 +96,35 @@ class seq_gui(QWidget):
         #making seq uppercase
         seq = seq.upper()
 
-        #getting the randomization percentage
-        randPercent = int(self.label_rand.text())
+        #valid character check
+        if self._seqCheck(seq):
 
-        #getting amino chain from original sequence
-        proteinSeq = Seq(seq)
-        oldAnimoChain = str(proteinSeq.translate())
+            #getting the randomization percentage
+            randPercent = int(self.label_rand.text())
 
-        #randomiztion process
-        newSeq = self.randomizer.randomize(seq, randPercent)
+            #getting amino chain from original sequence
+            proteinSeq = Seq(seq)
+            oldAnimoChain = str(proteinSeq.translate())
 
-        #getting new amino chain
-        newProteinSeq = Seq(newSeq)
-        newAnimoChain = str(newProteinSeq.translate())
+            #randomiztion process
+            newSeq = self.randomizer.randomize(seq, randPercent)
 
-        #comparing chains
-        #and updating textedit field and analyzing
-        if newAnimoChain == oldAnimoChain:
-            self.textEdit_seq.setText(newSeq)
-            self._analyzeSequence(newSeq)
+            #getting new amino chain
+            newProteinSeq = Seq(newSeq)
+            newAnimoChain = str(newProteinSeq.translate())
+
+            #comparing chains
+            #and updating textedit field and analyzing
+            if newAnimoChain == oldAnimoChain:
+                self.textEdit_seq.setText(newSeq)
+                self._analyzeSequence(newSeq)
+            else:
+                self._errorMessage("Animo Acid Chain MisMatch")
+                self.textEdit_aminoSeq.setText("Animo Acid Chain MisMatch!")
+
         else:
-            self._errorMessage("Animo Acid Chain MisMatch")
-            self.textEdit_aminoSeq.setText("Animo Acid Chain MisMatch!")
-
+            #Error Message
+            self._errorMessage("Invalid Characters detected in Sequence.")
 
 
     #creates the functionality for the Analyze Sequence button
@@ -135,7 +141,7 @@ class seq_gui(QWidget):
         if self._seqCheck(seq):
             #calling private analysis functionality
             self._analyzeSequence(seq)
-            
+
         else:
             #Error Message
             self._errorMessage("Invalid Characters detected in Sequence.")

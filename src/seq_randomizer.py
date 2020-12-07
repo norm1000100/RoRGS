@@ -1,5 +1,5 @@
 """
---Seqence Randomizer File--
+--Sequence Randomizer File--
 
 Just a place holder at the moment
 
