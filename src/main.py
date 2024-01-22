@@ -12,7 +12,7 @@ Creates The QApplication, Initializes GUI, then displays it.
 __author__          = "Scott Howes, Braeden Van Der Velde"
 __credits__         = "Scott Howes, Braeden Van Der Velde"
 __email__           = "showes@unbc.ca, "
-__python_version__  = "3.9.0"
+__python_version__  = "5.13.1"
 
 
 #imports go here
